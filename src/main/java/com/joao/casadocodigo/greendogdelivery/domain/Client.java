@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Client {
@@ -63,5 +64,27 @@ public class Client {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(address, client.address) && Objects.equals(orders, client.orders);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address, orders);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", orders=" + orders +
+                '}';
     }
 }
