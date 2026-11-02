@@ -32,6 +32,14 @@ public class Order {
 
     public Order() {}
 
+    public Order(Long id, Client client, List<Item> items, Double totalValue) {
+        super();
+        this.id = id;
+        this.client = client;
+        this.items = items;
+        this.totalValue = totalValue;
+    }
+
     public Order(Long id, Client client, List<Item> items, Date date, Double totalValue, String status) {
         super();
         this.id = id;
