@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,6 +61,11 @@ public class Client {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public void newOrder(Order order) {
+        if (this.orders == null) orders = new ArrayList<Order>();
+        orders.add(order);
     }
 
     public void setOrders(List<Order> orders) {
