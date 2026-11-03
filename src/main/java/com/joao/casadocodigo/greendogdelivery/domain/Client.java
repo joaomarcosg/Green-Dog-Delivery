@@ -26,6 +26,12 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Order> orders;
 
+    public Client(String name, String address) {
+        super();
+        this.name = name;
+        this.address = address;
+    }
+
     public Client(Long id, String name, String address) {
         super();
         this.id = id;
@@ -74,14 +80,18 @@ public class Client {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(address, client.address) && Objects.equals(orders, client.orders);
+        if (id == null || client.id == null) {
+            return false;
+        }
+        return id.equals(client.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, address, orders);
+        return Objects.hash(id);
     }
 
     @Override
@@ -90,7 +100,6 @@ public class Client {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", orders=" + orders +
                 '}';
     }
 }

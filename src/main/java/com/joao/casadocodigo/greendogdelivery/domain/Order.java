@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -31,6 +32,13 @@ public class Order {
     private String status;
 
     public Order() {}
+
+    public Order(Client client, List<Item> items, Double totalValue) {
+        super();
+        this.client = client;
+        this.items = items;
+        this.totalValue = totalValue;
+    }
 
     public Order(Long id, Client client, List<Item> items, Double totalValue) {
         super();
@@ -94,12 +102,12 @@ public class Order {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id == order.id && Objects.equals(client, order.client) && Objects.equals(items, order.items) && Objects.equals(date, order.date) && Objects.equals(totalValue, order.totalValue);
+        return id == order.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, items, date, totalValue);
+        return Objects.hashCode(id);
     }
 
     @Override

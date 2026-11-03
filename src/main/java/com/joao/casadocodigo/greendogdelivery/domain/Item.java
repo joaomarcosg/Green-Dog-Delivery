@@ -26,6 +26,12 @@ public class Item {
 
     public Item() {}
 
+    public Item(String name, Double price) {
+        super();
+        this.name = name;
+        this.price = price;
+    }
+
     public Item(Long id, String name, Double price) {
         super();
         this.id = id;
@@ -61,12 +67,12 @@ public class Item {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(price, item.price);
+        return Objects.equals(id, item.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hashCode(id);
     }
 
     @Override
