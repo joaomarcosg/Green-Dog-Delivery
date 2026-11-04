@@ -4,36 +4,26 @@ import com.joao.casadocodigo.greendogdelivery.domain.Client;
 import com.joao.casadocodigo.greendogdelivery.domain.Item;
 import com.joao.casadocodigo.greendogdelivery.domain.Order;
 import com.joao.casadocodigo.greendogdelivery.repository.ClientRepository;
+import com.joao.casadocodigo.greendogdelivery.repository.ItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Component
 public class RepositoryTest implements ApplicationRunner {
 
     Logger logger = LoggerFactory.getLogger(RepositoryTest.class.getSimpleName());
 
-    private static final long ID_CLIENT_FERNANDO = 11L;
-    private static final long ID_CLIENT_BRUNA = 22L;
-
-    private static final long ID_ITEM1 = 100L;
-    private static final long ID_ITEM2 = 101L;
-    private static final long ID_ITEM3 = 103L;
-
-    private static final long ID_ORDER1 = 1000L;
-    private static final long ID_ORDER2 = 1001L;
-    private static final long ID_ORDER3 = 1002L;
-
     private ClientRepository clientRepository;
+    private final ItemRepository itemRepository;
 
-    public RepositoryTest(ClientRepository clientRepository) {
+    public RepositoryTest(ClientRepository clientRepository, ItemRepository itemRepository) {
         this.clientRepository = clientRepository;
+        this.itemRepository = itemRepository;
     }
 
     @Override
@@ -41,37 +31,37 @@ public class RepositoryTest implements ApplicationRunner {
 
         logger.info(">>> Starting data load...");
 
-        var fernando = new Client(ID_CLIENT_FERNANDO, "Fernando Boaglio", "São Paulo");
-        var bruna = new Client(ID_CLIENT_BRUNA, "Bruna Marco", "Rio de Janeiro");
+        var dog1 = itemRepository.save(new Item("Green Dog tradicional", 25d));
+        var dog2 = itemRepository.save(new Item("Green Dog tradicional picante", 27d));
+        var dog3 = itemRepository.save(new Item("Green Dog mix salada", 30d));
 
-        var dog1 = new Item(ID_ITEM1, "Green Dog tradicional", 25d);
-        var dog2 = new Item(ID_ITEM2, "Green Dog tradicional picante", 25d);
-        var dog3 = new Item(ID_ITEM3, "Green Dog mix salada", 30d);
+        var fernando = new Client("Fernando Boaglio", "São Paulo");
+        var ana = new Client("Ana Marco", "Rio de Janeiro");
 
         var orderListFernando1 = new ArrayList<Item>();
         orderListFernando1.add(dog1);
 
-        var orderListBruna1 = new ArrayList<Item>();
-        orderListBruna1.add(dog2);
-        orderListBruna1.add(dog3);
+        var orderListAna1 = new ArrayList<Item>();
+        orderListAna1.add(dog2);
+        orderListAna1.add(dog3);
 
-        var orderFernando = new Order(ID_ORDER1, fernando, orderListFernando1, dog1.getPrice());
+        var orderFernando = new Order(fernando, orderListFernando1, dog1.getPrice());
         fernando.newOrder(orderFernando);
 
-        var orderBruna = new Order(ID_ORDER2, bruna, orderListBruna1, dog2.getPrice() + dog3.getPrice());
-        bruna.newOrder(orderBruna);
+        var orderAna = new Order(ana, orderListAna1, dog2.getPrice() + dog3.getPrice());
+        ana.newOrder(orderAna);
 
         logger.info(">>> Order 1 - Fernando : " + orderFernando);
-        logger.info(">>> Order 2 - Bruna : " + orderBruna);
+        logger.info(">>> Order 2 - Ana : " + orderAna);
 
-        clientRepository.saveAndFlush(bruna);
+        clientRepository.saveAndFlush(ana);
 
-        logger.info(">>> Recorded client 2 : " + bruna);
+        logger.info(">>> Recorded client 2 : " + ana);
 
         var orderListFernando2 = new ArrayList<Item>();
         orderListFernando2.add(dog2);
 
-        var order2Fernando = new Order(ID_ORDER3, fernando, orderListFernando2, dog2.getPrice());
+        var order2Fernando = new Order(fernando, orderListFernando2, dog2.getPrice());
         fernando.newOrder(order2Fernando);
         logger.info(">>> Order 2 - Fernando : " + order2Fernando);
 
