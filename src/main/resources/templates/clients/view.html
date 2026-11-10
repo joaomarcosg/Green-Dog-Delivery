@@ -19,16 +19,16 @@
         </thead>
         <tbody>
         <tr>
-            <td id="id" th:text="${cliente.id}">123</td>
-            <td id="nome" th:text="${cliente.nome}">Nome...</td>
-            <td id="endereco" th:text="${cliente.endereco}">Endereco...</td>
+            <td id="id" th:text="${client.id}">123</td>
+            <td id="nome" th:text="${client.name}">Nome...</td>
+            <td id="endereco" th:text="${client.address}">Endereco...</td>
         </tr>
         </tbody>
     </table>
     <div class="pull-left">
-        <a href="form.html" th:href="@{'/clientes/alterar/' + ${cliente.id}}">alterar</a>
-        | <a href="clientes" th:href="@{'/clientes/remover/' + ${cliente.id}}">remover</a>
-        | <a th:href="@{/clientes/}" href="list.html">voltar</a>
+        <a href="form.html" th:href="@{'/clients/update/' + ${cliente.id}}">alterar</a>
+        | <a href="clientes" th:href="@{'/clients/remove/' + ${cliente.id}}">remover</a>
+        | <a th:href="@{/clients/}" href="list.html">voltar</a>
     </div>
 </div>
 </body>

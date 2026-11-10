@@ -8,23 +8,23 @@
 <body>
 <h1 layout:fragment="header">Lista de clientes</h1>
 <div layout:fragment="content" class="container">
-    <a href="form.html" th:href="@{/clientes/novo}">Novo cliente</a>
+    <a href="form.html" th:href="@{/clients/new}">Novo cliente</a>
     <div class="alert alert-success" th:if="${globalMessage}"
          th:text="${globalMessage}">mensagem</div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
             <td>ID</td>
-            <td>Nome</td>
+            <td>Name</td>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${clientes.empty}">
+        <tr th:if="${clients.empty}">
             <td colspan="3">Sem clientes</td>
         </tr>
-        <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.id}">1</td>
-            <td><a href="view.html" th:href="@{'/clientes/' + ${cliente.id}}" th:text="${cliente.nome}"> nome </a></td>
+        <tr th:each="cliente : ${clients}">
+            <td th:text="${client.id}">1</td>
+            <td><a href="view.html" th:href="@{'/clients/' + ${client.id}}" th:text="${client.name}"> nome </a></td>
         </tr>
         </tbody>
     </table>
