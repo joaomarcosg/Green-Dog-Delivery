@@ -23,8 +23,8 @@
             <td colspan="3">Sem clientes</td>
         </tr>
         <tr th:each="cliente : ${clients}">
-            <td th:text="${client.id}">1</td>
-            <td><a href="view.html" th:href="@{'/clients/' + ${client.id}}" th:text="${client.name}"> nome </a></td>
+            <td th:text="${cliente.id}">1</td>
+            <td><a href="view.html" th:href="@{'/clients/' + ${cliente.id}}" th:text="${cliente.name}"> nome </a></td>
         </tr>
         </tbody>
     </table>
