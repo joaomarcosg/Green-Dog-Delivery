@@ -23,7 +23,7 @@ public class ClientController {
         return  new ModelAndView("clients/list", "clients", clients);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ModelAndView view(@PathVariable("id") Client client) {
         return new ModelAndView("clients/view", "client", client);
     }
