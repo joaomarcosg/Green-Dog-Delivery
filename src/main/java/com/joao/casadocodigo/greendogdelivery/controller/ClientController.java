@@ -4,6 +4,7 @@ import com.joao.casadocodigo.greendogdelivery.domain.Client;
 import com.joao.casadocodigo.greendogdelivery.repository.ClientRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,5 +27,10 @@ public class ClientController {
     @GetMapping("/{id}")
     public ModelAndView view(@PathVariable("id") Client client) {
         return new ModelAndView("clients/view", "client", client);
+    }
+
+    @GetMapping("/new")
+    public String createForm(@ModelAttribute Client client) {
+        return "clients/form";
     }
 }
