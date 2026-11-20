@@ -25,11 +25,10 @@
                 <label class="control-label col-sm-2" for="address" style="margin-bottom: 0.5rem;">Endereço</label>
                 <textarea class="col-sm-10" th:field="*{address}" th:class="${#fields.hasErrors('address')} ? 'field-error'"></textarea>
             </div>
-            <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="Gravar" style="background-color: #0d6efd; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;" />
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <input type="submit" value="Gravar" style="background-color: #0d6efd; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; min-width: 90px; text-align: center;" />
+                <a th:href="@{/clients/}" href="clients.html" style="background-color: #6c757d; color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block; min-width: 90px; text-align: center;"> voltar </a>
             </div>
-            <br/>
-            <a th:href="@{/clients/}" href="clients.html" style="background-color: #6c757d; color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block;"> voltar </a>
         </form>
     </div>
 </div>
